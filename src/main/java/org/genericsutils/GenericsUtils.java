@@ -3,10 +3,7 @@ package org.genericsutils;
 import lombok.SneakyThrows;
 import sun.reflect.generics.reflectiveObjects.ParameterizedTypeImpl;
 
-import java.lang.reflect.Modifier;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.lang.reflect.TypeVariable;
+import java.lang.reflect.*;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -218,6 +215,8 @@ public class GenericsUtils {
             } else if (actualTypeArgument instanceof TypeVariable) {
                 TypeVariable<?> typeVariable = (TypeVariable<?>) actualTypeArgument;
                 newActualTypeArgument = mapOfNamesAndTypes.get(typeVariable.getName());
+            } else if (actualTypeArgument instanceof WildcardType) {
+                newActualTypeArgument = WildcardType.class;
             } else {
                 throw new RuntimeException("Unexpected type of ActualTypeArgument " + actualTypeArgument.getTypeName());
             }
