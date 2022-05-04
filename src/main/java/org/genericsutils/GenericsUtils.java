@@ -217,6 +217,8 @@ public class GenericsUtils {
                 newActualTypeArgument = mapOfNamesAndTypes.get(typeVariable.getName());
             } else if (actualTypeArgument instanceof WildcardType) {
                 newActualTypeArgument = WildcardType.class;
+            } else if (actualTypeArgument instanceof Class) {
+                newActualTypeArgument = actualTypeArgument;
             } else {
                 throw new RuntimeException("Unexpected type of ActualTypeArgument " + actualTypeArgument.getTypeName());
             }
